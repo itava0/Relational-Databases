@@ -27,6 +27,17 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  db.insert(req.body, "id")
+    .into("accounts")
+    .then(ids => {
+      res.status(201).json(ids);
+    })
+    .catch(error => {
+      res.status(500).json({ error: "Failed to insert accounts" });
+    });
+});
+
 
 
 module.exports = router;
